@@ -1,6 +1,6 @@
 # vagrant-data_science
 
-Debian based
+Virtualbox, Ansible, Debian based
 
 ## Contains
 
@@ -20,6 +20,20 @@ Debian based
 * vagrant up
 * Log in as your preferred user and source post_bootstrap.sh
 * Optionally run bootstrap-hdd.sh
+
+## Troubleshooting
+
+- Run playbook manually
+
+	vagrant provision
+
+or
+
+	ansible-playbook --private-key=~/.vagrant.d/insecure_private_key -u vagrant site.yml
+
+## TODO
+
+More ansible
 
 ## Disclaimer
 

@@ -15,6 +15,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder File.join("..", "vm_share"), "/media/vm_share",
         create: true, owner: "mendel", group: "mendel"
 
+  config.vm.network "private_network", type: "dhcp"
+
   if Vagrant.has_plugin?("vagrant-cachier")
     config.cache.scope = :box
   end
@@ -47,8 +49,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   end
   
-  config.vm.provision :shell, path: "bootstrap.sh"
-  
-#  config.vm.provision :shell, path: "bootstrap-hdd.sh -u #{second_disk_uuid}"
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "site.yml"
+#    ansible.inventory_path = "staging"
+  end
 
 end

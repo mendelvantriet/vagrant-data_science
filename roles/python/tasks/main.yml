@@ -1,0 +1,12 @@
+---
+
+- name: Install Python packages
+  apt: name={{item}} state=installed
+  with_items:
+       - python3-pip 
+       - python3-virtualenv
+       - python3-numpy
+       - python3-scipy
+       - python3-pandas
+
+

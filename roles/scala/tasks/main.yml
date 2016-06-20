@@ -1,0 +1,15 @@
+---
+
+- name: Install SBT apt key
+  apt_key: id=642AC823 keyserver='keyserver.ubuntu.com' state=present
+  register: sbtkey
+  until: sbtkey|success
+  retries: 5
+  delay: 10
+
+- name: Install SBT repo
+  apt_repository: repo='deb https://dl.bintray.com/sbt/debian /' state=present
+
+- name: Install SBT package
+  apt: pkg=sbt state=latest
+
