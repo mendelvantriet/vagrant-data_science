@@ -11,19 +11,6 @@ function addToPath {
 	echo export PATH="$PATH" >> $SHELL_RC
 }
 
-sudo apt-get install -y libfreetype6-dev pkg-config python-dev g++ # needed for matplotlib
-sudo apt-get install -y build-essential python3-dev # needed for jupyter
-
-virtualenv --system-site-packages -p /usr/bin/python2.7 venv-2.7
-source ~/venv-2.7/bin/activate
-pip install jupyter matplotlib
-deactivate
-
-virtualenv --system-site-packages -p /usr/bin/python3.4 venv-3.4
-source ~/venv-3.4/bin/activate
-pip3 install jupyter matplotlib scikit-learn nltk
-deactivate
-
 # sbt
 mkdir -p ~/.sbt/$SBT_VERSION/plugins
 echo 'addSbtPlugin("com.typesafe.sbteclipse" % "sbteclipse-plugin" % "4.0.0")' | tee ~/.sbt/$SBT_VERSION/plugins/plugins.sbt

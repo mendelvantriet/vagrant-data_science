@@ -1,6 +1,5 @@
 .vagrant/
 *.retry
-**/files/*
 apache-maven-3.3.3-bin.tar.gz
 eclipse-jee.desktop
 eclipse-jee-mars-R-linux-gtk-x86_64.tar.gz

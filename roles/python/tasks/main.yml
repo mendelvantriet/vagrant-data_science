@@ -3,10 +3,38 @@
 - name: Install Python packages
   apt: name={{item}} state=installed
   with_items:
+       - python-pip 
        - python3-pip 
-       - python3-virtualenv
        - python3-numpy
        - python3-scipy
        - python3-pandas
+       # needed for matplotlib
+       - libfreetype6-dev
+       - pkg-config 
+       - python-dev 
+       - g++ 
+       # needed for jupyter
+       - build-essential 
+       - python3-dev 
 
+- name: Install virtualenv
+  pip: name=virtualenv
+
+- name: Create Python 3.4 venv
+  become: yes
+  become_user: mendel
+  pip:
+    requirements=/vagrant/files/pip-requirements.txt
+    virtualenv=/home/mendel/venv-3.4
+    virtualenv_python=python3.4
+    virtualenv_site_packages=yes
+
+- name: Create Python 2.7 venv
+  become: yes
+  become_user: mendel
+  pip:
+    requirements=/vagrant/files/pip-requirements.txt
+    virtualenv=/home/mendel/venv-2.7
+    virtualenv_python=python2.7
+    virtualenv_site_packages=yes
 
