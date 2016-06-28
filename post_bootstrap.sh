@@ -11,21 +11,6 @@ function addToPath {
 	echo export PATH="$PATH" >> $SHELL_RC
 }
 
-# sbt
-mkdir -p ~/.sbt/$SBT_VERSION/plugins
-echo 'addSbtPlugin("com.typesafe.sbteclipse" % "sbteclipse-plugin" % "4.0.0")' | tee ~/.sbt/$SBT_VERSION/plugins/plugins.sbt
-cd tmp && echo exit | sbt -v && cd ../
-
-# scala
-if [[ -f "/vagrant/scala-$SCALA_VERSION.tgz" ]]; then
-	echo "[INFO] Installing Scala..."
-	tar -xzf /vagrant/scala-$SCALA_VERSION.tgz -C ~/applications/
-	ln -s scala-$SCALA_VERSION ~/applications/scala
-	ln -s ../applications/scala/bin/scala ~/bin/scala
-else
-	echo "[WARNING] Scala not installed"
-fi
-
 # spark
 if [[ ! -f "/vagrant/spark-$SPARK_VERSION-bin-hadoop2.6.tgz" ]]; then
 	sudo wget http://apache.cs.uu.nl/spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop2.6.tgz -P /vagrant
@@ -66,20 +51,6 @@ else
 	echo "[WARNING] Eclipse not installed"
 fi
 
-# eclipse for scala
-if [[ -f "/vagrant/scala-SDK-4.3.0-vfinal-2.11-linux.gtk.x86_64.tar.gz" ]]; then
-	echo "[INFO] Installing Eclipse-scala..."
-	mkdir -p ~/applications/eclipse-scala && tar xf /vagrant/scala-SDK-4.3.0-vfinal-2.11-linux.gtk.x86_64.tar.gz -C ~/applications/eclipse-scala --strip-components 1
-	ln -s ../applications/eclipse-scala/eclipse ~/bin/eclipse-scala
-#	~/bin/eclipse-scala \
-#		-application org.eclipse.equinox.p2.director \
-#		-repository http://download.eclipse.org/egit/updates/ \
-#		-installIU org.eclipse.egit \
-#		-destination ~/applications/eclipse-scala/
-   
-else
-	echo "[WARNING] Eclipse-scala not installed"
-fi
 
 echo "Done"
 

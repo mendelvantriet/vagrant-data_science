@@ -1,0 +1,5 @@
+---
+
+user: mendel
+scala_version: 2.11.8
+sbt_version: 0.13
