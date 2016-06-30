@@ -1,0 +1,38 @@
+---
+
+- name: Download Spark
+  get_url:
+    url="http://apache.cs.uu.nl/spark/spark-{{spark_version}}/spark-{{spark_version}}-bin-hadoop2.6.tgz"
+    dest="/root/"
+  register: new_spark_archive
+
+- name: Unarchive Spark
+  unarchive:
+    src="/root/spark-{{spark_version}}-bin-hadoop2.6.tgz"
+    dest="/opt/"
+    copy=no
+  when: new_spark_archive|changed
+
+- name: Link Spark
+  file: path=/opt/spark state=link src=/opt/spark-{{spark_version}}-bin-hadoop2.6
+
+- name: Add '/opt/spark/bin' to PATH
+  lineinfile:
+    dest={{ shell_rc_file }}
+    state=present
+    backrefs=yes
+    regexp='export PATH=(["]*)((?!.*?/opt/spark/bin).*?)(["]*)$'
+    line="export PATH=\1\2:/opt/spark/bin\3"
+
+- name: Create SPARK_HOME variable
+  lineinfile:
+    dest={{ shell_rc_file }}
+    state=present
+    line="export SPARK_HOME=/opt/spark"
+
+- name: Create 'pyspark-notebook' alias
+  lineinfile:
+    dest={{ shell_rc_file }}
+    state=present
+    line="alias pyspark-notebook='PYSPARK_DRIVER_PYTHON=ipython PYSPARK_DRIVER_PYTHON_OPTS=notebook pyspark --master local[*]'"
+

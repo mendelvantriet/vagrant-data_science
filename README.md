@@ -18,7 +18,7 @@ Virtualbox, Ansible, Debian based
 * Get the private_key file from your base box
 * Download some of the files listed in gitignore
 * vagrant up
-* Log in as your preferred user and source post_bootstrap.sh
+* Log in as your preferred user
 * Optionally run bootstrap-hdd.sh
 
 ## Troubleshooting

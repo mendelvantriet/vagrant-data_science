@@ -1,0 +1,5 @@
+---
+
+user: mendel
+shell_rc_file: /home/mendel/.zshrc
+spark_version: 1.6.1
