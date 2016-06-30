@@ -1,0 +1,24 @@
+---
+
+- name: Install Maven
+  apt: name=maven state=installed
+
+- name: Download Eclipse Neon
+  get_url:
+    url="http://ftp.snt.utwente.nl/pub/software/eclipse/technology/epp/downloads/release/neon/R/eclipse-jee-neon-R-linux-gtk-x86_64.tar.gz"
+    checksum=sha512:e66bfafb3fb568a23c203c7acf64a92b9424f7f03673bcb2ae23e77cb3001bbacc3acdf041e120657ce9eeb49c39009104bb046bafd2584ca2202333c31d08c4
+    dest="/root/"
+  register: new_eclipse_archive
+
+- name: Unarchive Eclipse
+  unarchive:
+    src="/root/eclipse-jee-neon-R-linux-gtk-x86_64.tar.gz"
+    dest="/home/{{user}}/applications"
+    copy=no owner={{user}} group={{user}}
+  when: new_eclipse_archive|changed
+
+- name: Rename Eclipse folder
+  command: mv /home/{{user}}/applications/eclipse /home/{{user}}/applications/eclipse-jee
+  args:
+    creates: /home/{{user}}/applications/eclipse-jee
+

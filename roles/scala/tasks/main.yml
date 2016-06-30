@@ -58,5 +58,6 @@
 
 - name: Rename Eclipse folder
   command: mv /home/{{user}}/applications/eclipse /home/{{user}}/applications/eclipse-scala
-  when: new_eclipse_archive|changed
+  args:
+    creates: /home/{{user}}/applications/eclipse-scala
 

@@ -5,6 +5,7 @@
   roles:
   - common
   - jdk
+  - java
   - python
   - r
   - scala
