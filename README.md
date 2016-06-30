@@ -16,7 +16,6 @@ Virtualbox, Ansible, Debian based
 
 * Edit some variables like basebox and spark-version
 * Get the private_key file from your base box
-* Download some of the files listed in gitignore
 * vagrant up
 * Log in as your preferred user
 * Optionally run bootstrap-hdd.sh

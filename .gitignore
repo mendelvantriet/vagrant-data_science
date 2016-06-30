@@ -1,11 +1,5 @@
 .vagrant/
 *.retry
-apache-maven-3.3.3-bin.tar.gz
 eclipse-jee.desktop
-eclipse-jee-mars-R-linux-gtk-x86_64.tar.gz
 eclipse-scala.desktop
 private_key
-rstudio-0.99.491-amd64.deb
-scala-2.10.3.tgz
-scala-SDK-4.3.0-vfinal-2.11-linux.gtk.x86_64.tar.gz
-spark-1.5.2-bin-hadoop2.6.tgz
