@@ -22,19 +22,19 @@
 
 - name: Create Python 3.4 venv
   become: yes
-  become_user: mendel
+  become_user: {{user}}
   pip:
     requirements=/vagrant/files/pip-requirements.txt
-    virtualenv=/home/mendel/venv-3.4
+    virtualenv=/home/{{user}}/venv-3.4
     virtualenv_python=python3.4
     virtualenv_site_packages=yes
 
 - name: Create Python 2.7 venv
   become: yes
-  become_user: mendel
+  become_user: {{user}}
   pip:
     requirements=/vagrant/files/pip-requirements.txt
-    virtualenv=/home/mendel/venv-2.7
+    virtualenv=/home/{{user}}/venv-2.7
     virtualenv_python=python2.7
     virtualenv_site_packages=yes
 
