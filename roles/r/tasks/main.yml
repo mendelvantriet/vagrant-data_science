@@ -4,5 +4,5 @@
   apt: name=r-base state=installed
 
 - name: Install RStudio
-  apt: deb=/vagrant/rstudio-0.99.491-amd64.deb
+  apt: deb=https://download1.rstudio.org/rstudio-0.99.902-amd64.deb
 
