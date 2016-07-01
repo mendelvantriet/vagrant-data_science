@@ -8,7 +8,9 @@
   delay: 10
 
 - name: Install WebUpd8 Team Java PPA (for Oracle Java)
-  apt_repository: repo='deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' state=present
+  apt_repository: repo='deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' 
+    mode=644
+    state=present
 
 - name: Accept Oracle License
   debconf: name=oracle-java8-installer question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
