@@ -34,5 +34,5 @@
   lineinfile:
     dest={{ shell_rc_file }}
     state=present
-    line="alias pyspark-notebook='PYSPARK_DRIVER_PYTHON=ipython PYSPARK_DRIVER_PYTHON_OPTS=notebook pyspark --master local[*]'"
+    line="alias pyspark-notebook='PYSPARK_DRIVER_PYTHON=ipython PYSPARK_DRIVER_PYTHON_OPTS=notebook pyspark --master \"local[*]\"'"
 
