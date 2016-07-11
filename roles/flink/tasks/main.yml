@@ -1,0 +1,32 @@
+---
+
+- name: Download Flink checksum
+  get_url:
+    url="{{ flink_backup_server }}{{ flink_name }}.tgz.sha"
+    dest="/root/"
+
+- name: Extract checksum
+  shell: cat /root/{{ flink_name }}.tgz.sha | cut -d ' ' -f1
+  register: flink_checksum
+
+- name: Download Flink
+  get_url:
+    url="{{ flink_mirror }}{{ flink_name }}.tgz"
+    dest="/root/{{ flink_name }}.tgz"
+    checksum=sha512:{{flink_checksum.stdout}}
+  register: new_flink_archive
+
+- name: Unarchive Flink
+  unarchive:
+    src="/root/{{ flink_name }}.tgz"
+    dest="/opt/"
+    copy=no owner=root group=root
+
+- name: Rename Flink folder
+  command: mv /opt/flink-{{ flink_version }} /opt/{{ flink_name }}
+  args:
+    creates: /opt/{{ flink_name }}/
+
+- name: Link Flink
+  file: path=/opt/flink state=link src={{ flink_name }}
+

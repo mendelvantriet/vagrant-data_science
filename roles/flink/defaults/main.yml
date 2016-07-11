@@ -1,0 +1,7 @@
+---
+
+flink_version: 1.0.3
+flink_name: flink-{{ flink_version }}-bin-hadoop1-scala_2.10
+flink_mirror: http://mirror.vorboss.net/apache/flink/flink-{{ flink_version }}/
+flink_backup_server: http://www-eu.apache.org/dist/flink/flink-{{ flink_version }}/
+
