@@ -3,14 +3,14 @@
 - name: Download Spark
   get_url:
     url="http://apache.cs.uu.nl/spark/spark-{{spark_version}}/spark-{{spark_version}}-bin-hadoop2.6.tgz"
-    dest="/root/"
+    dest="/root/spark-{{spark_version}}-bin-hadoop2.6.tgz"
   register: new_spark_archive
 
 - name: Unarchive Spark
   unarchive:
     src="/root/spark-{{spark_version}}-bin-hadoop2.6.tgz"
     dest="/opt/"
-    copy=no
+    copy=no user=root group=root
   when: new_spark_archive|changed
 
 - name: Link Spark
