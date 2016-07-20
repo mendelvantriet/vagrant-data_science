@@ -2,8 +2,8 @@
 
 - name: Download Flink checksum
   get_url:
-    url="{{ flink_backup_server }}{{ flink_name }}.tgz.sha"
-    dest="/root/"
+    url="{{ flink_checksum_uri }}"
+    dest="/root/{{ flink_name }}.tgz.sha"
 
 - name: Extract checksum
   shell: cat /root/{{ flink_name }}.tgz.sha | cut -d ' ' -f1
@@ -11,7 +11,7 @@
 
 - name: Download Flink
   get_url:
-    url="{{ flink_mirror }}{{ flink_name }}.tgz"
+    url="{{ flink_mirror }}/apache/flink/flink-{{ flink_version }}/{{ flink_name }}.tgz"
     dest="/root/{{ flink_name }}.tgz"
     checksum=sha512:{{flink_checksum.stdout}}
   register: new_flink_archive
