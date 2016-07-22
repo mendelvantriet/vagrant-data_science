@@ -21,6 +21,10 @@
 
 http://localhost:8081/#/overview
 
+## Troubleshooting
+
+- NoResourceAvailableException: Not enough free slots available to run the job.
+  To avoid this error, increase the taskmanager.numberOfTaskSlots configuration option, or cancel a previously run job using the web interface. Cancelling a job using ctrl-C on the command line is not enough to free up the slot.
 
 ## Stop cluster
 
