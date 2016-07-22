@@ -6,7 +6,8 @@
 
 ## Start Zookeeper
 
-	sudo bin/zookeeper-server-start.sh config/zookeeper.properties
+	su kafka
+	bin/zookeeper-server-start.sh config/zookeeper.properties
 
 ## Start Kafka
 
