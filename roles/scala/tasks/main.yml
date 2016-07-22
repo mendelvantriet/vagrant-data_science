@@ -3,21 +3,22 @@
 - name: Download Scala
   get_url:
     url="http://downloads.lightbend.com/scala/{{scala_version}}/scala-{{scala_version}}.tgz"
-    dest="/root/"
+    dest="/root/scala-{{scala_version}}.tgz"
   register: new_scala_archive
 
 - name: Unarchive Scala
   unarchive:
     src="/root/scala-{{scala_version}}.tgz"
     dest="/opt/"
-    copy=no
+    copy=no owner=root group=root
   when: new_scala_archive|changed
 
 - name: Link Scala
   file: path=/opt/scala state=link src=/opt/scala-{{scala_version}}
 
 - name: Link Scala binary
-  file: path=/home/{{user}}/bin/scala state=link src=/opt/scala/bin/scala owner={{user}} group={{user}}
+  file: path=/home/{{user}}/bin/scala state=link src=/opt/scala/bin/scala 
+    owner={{user}} group={{user}}
 
 - name: Install SBT apt key
   apt_key: id=642AC823 keyserver='keyserver.ubuntu.com' state=present
@@ -33,10 +34,14 @@
   apt: pkg=sbt state=latest
 
 - name: Create SBT plugins directory
-  file: path=/home/{{user}}/.sbt/{{sbt_version}}/plugins state=directory owner={{user}} group={{user}}
+  file: path=/home/{{user}}/.sbt/{{sbt_version}}/plugins state=directory 
+    owner={{user}} group={{user}}
 
 - name: Copy SBT plugins file
-  template: src=plugins.sbt.j2 dest=/home/{{user}}/.sbt/{{sbt_version}}/plugins/plugins.sbt owner={{user}} group={{user}}
+  template: 
+    src=plugins.sbt.j2 
+    dest=/home/{{user}}/.sbt/{{sbt_version}}/plugins/plugins.sbt 
+    owner={{user}} group={{user}}
 
 - name: Initialize SBT
   command: echo exit | sbt -v
@@ -45,13 +50,13 @@
 
 - name: Download Eclipse for Scala
   get_url:
-    url="http://downloads.typesafe.com/scalaide-pack/4.4.1-vfinal-luna-211-20160504/scala-SDK-4.4.1-vfinal-2.11-linux.gtk.x86_64.tar.gz"
-    dest="/root/"
+    url="{{ eclipse_mirror }}/{{ eclipse_name }}.tar.gz"
+    dest="/root/{{ eclipse_name }}.tar.gz"
   register: new_eclipse_archive
 
 - name: Unarchive Eclipse
   unarchive:
-    src="/root/scala-SDK-4.4.1-vfinal-2.11-linux.gtk.x86_64.tar.gz"
+    src="/root/{{ eclipse_name }}.tar.gz"
     dest="/home/{{user}}/applications"
     copy=no owner={{user}} group={{user}}
   when: new_eclipse_archive|changed

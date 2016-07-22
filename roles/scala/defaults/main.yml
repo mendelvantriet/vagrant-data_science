@@ -3,3 +3,5 @@
 user: mendel
 scala_version: 2.11.8
 sbt_version: 0.13
+eclipse_name: scala-SDK-4.4.1-vfinal-2.11-linux.gtk.x86_64
+eclipse_mirror: http://downloads.typesafe.com/scalaide-pack/4.4.1-vfinal-luna-211-20160504
