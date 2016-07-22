@@ -1,20 +1,30 @@
 ---
 
+- name: Download checksum
+  get_url:
+    url="{{ spark_checksum_uri }}"
+    dest="/root/{{ spark_name }}.tgz.md5"
+
+- name: Extract checksum
+  shell: cat /root/{{ spark_name }}.tgz.md5 | cut -d ':' -f2
+  register: spark_checksum
+
 - name: Download Spark
   get_url:
-    url="http://apache.cs.uu.nl/spark/spark-{{spark_version}}/spark-{{spark_version}}-bin-hadoop2.6.tgz"
-    dest="/root/spark-{{spark_version}}-bin-hadoop2.6.tgz"
+    url="{{ spark_mirror }}/spark/spark-{{spark_version}}/{{ spark_name }}.tgz"
+    dest="/root/{{ spark_name }}.tgz"
+    checksum="md5:{{ spark_checksum.stdout }}"
   register: new_spark_archive
 
 - name: Unarchive Spark
   unarchive:
-    src="/root/spark-{{spark_version}}-bin-hadoop2.6.tgz"
+    src="/root/{{ spark_name }}.tgz"
     dest="/opt/"
-    copy=no user=root group=root
+    copy=no owner=root group=root
   when: new_spark_archive|changed
 
 - name: Link Spark
-  file: path=/opt/spark state=link src=/opt/spark-{{spark_version}}-bin-hadoop2.6
+  file: path=/opt/spark state=link src=/opt/{{ spark_name }}
 
 - name: Add '/opt/spark/bin' to PATH
   lineinfile:
