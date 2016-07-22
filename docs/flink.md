@@ -12,7 +12,7 @@
 ## Test
 
 	nc -l -p 9000
-	bin/flink run examples/streaming/SocketTextStreamWordCount.jar \
+	sudo bin/flink run examples/streaming/SocketTextStreamWordCount.jar \
 	  --hostname localhost \
 	  --port 9000
 	tail -f log/flink-*-jobmanager-*.out
@@ -28,6 +28,6 @@ http://localhost:8081/#/overview
 
 ## Stop cluster
 
-	bin/stop-local.sh
+	sudo bin/stop-local.sh
 
   
