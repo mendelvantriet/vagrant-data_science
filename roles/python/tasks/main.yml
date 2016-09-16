@@ -22,7 +22,7 @@
 
 - name: Create Python 3.4 venv
   become: yes
-  become_user: {{user}}
+  become_user: "{{ user }}"
   pip:
     requirements=/vagrant/files/pip-requirements.txt
     virtualenv=/home/{{user}}/venv-3.4
@@ -31,7 +31,7 @@
 
 - name: Create Python 2.7 venv
   become: yes
-  become_user: {{user}}
+  become_user: "{{ user }}"
   pip:
     requirements=/vagrant/files/pip-requirements.txt
     virtualenv=/home/{{user}}/venv-2.7
