@@ -20,13 +20,13 @@
 - name: Install virtualenv
   pip: name=virtualenv
 
-- name: Create Python 3.4 venv
+- name: Create Python 3 venv
   become: yes
   become_user: "{{ user }}"
   pip:
     requirements=/vagrant/files/pip-requirements.txt
-    virtualenv=/home/{{user}}/venv-3.4
-    virtualenv_python=python3.4
+    virtualenv=/home/{{user}}/venv-3
+    virtualenv_python=python3
     virtualenv_site_packages=yes
 
 - name: Create Python 2.7 venv
